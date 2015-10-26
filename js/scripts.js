@@ -1,25 +1,40 @@
 var moves=0;
 var wins = 0;
 var cards = [
-    '<img src="img/default/mosters-01.png">', '<img src="img/default/mosters-02.png">', 
-    '<img src="img/default/mosters-03.png">', '<img src="img/default/mosters-04.png">', 
-    '<img src="img/default/mosters-05.png">', '<img src="img/default/mosters-06.png">', 
-    '<img src="img/default/mosters-07.png">', '<img src="img/default/mosters-08.png">', 
-    '<img src="img/default/mosters-09.png">', '<img src="img/default/mosters-10.png">', 
-    '<img src="img/default/mosters-11.png">', '<img src="img/default/mosters-12.png">', 
-    '<img src="img/default/mosters-13.png">', '<img src="img/default/mosters-14.png">', 
-    '<img src="img/default/mosters-15.png">', '<img src="img/default/mosters-16.png">' 
+    '<img src="img/default/monsters-01.png">', '<img src="img/default/monsters-02.png">', 
+    '<img src="img/default/monsters-03.png">', '<img src="img/default/monsters-04.png">', 
+    '<img src="img/default/monsters-05.png">', '<img src="img/default/monsters-06.png">', 
+    '<img src="img/default/monsters-07.png">', '<img src="img/default/monsters-08.png">', 
+    '<img src="img/default/monsters-09.png">', '<img src="img/default/monsters-11.png">',
+    '<img src="img/default/monsters-13.png">', '<img src="img/default/monsters-14.png">', 
+    '<img src="img/default/monsters-15.png">', '<img src="img/default/monsters-16.png">' 
 ];
-var gridSize = 20;
+var gridSize = 8;
 var gameTiles = cards.slice(0,(gridSize/2));
 var gridArray = $.merge(gameTiles,gameTiles);
 
 
+
 $(document).ready(function(){
-
+// Use .append() to generate the required divs for the board... remember to addClass
+// when necessary so that the formatting stays consistent.
+// pseudo code outline
+// 
+// set up a for loop that will run through the length of the gridArray...
+// on each iteration must add a div, with two divs inside of it, each one of these
+// divs have specific classes that should be assigned to them that will format them.
+// 
+// populating the webpage with the required divs 
     for(i=0;i<gridArray.length;i++){
-
+        $("#mg_contents").append("<div class='mg_tile'><div class='mg_tile-inner'></div></div>");
     }
+        $('.mg_tile-inner').append('<div class="mg_tile-outside"></div><div class="mg_tile-inside"></div');
+    // Need to figure out how to add one image to each of the inside divs
+    // that I have generated... but looking good so far.
+    // var cardArray = $('.mg_tile-inside');
+    // for(i=0;i<cardArray.length;i++){
+
+    // }
 
     var visTile = $('.mg_tile-inside:visible')
 // for loop to shuffle the playing cards in the gridArray. 
