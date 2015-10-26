@@ -10,17 +10,22 @@ var cards = [
     '<img src="img/default/mosters-13.png">', '<img src="img/default/mosters-14.png">', 
     '<img src="img/default/mosters-15.png">', '<img src="img/default/mosters-16.png">' 
 ];
-var gridSize = 16;
+var gridSize = 20;
 var gameTiles = cards.slice(0,(gridSize/2));
 var gridArray = $.merge(gameTiles,gameTiles);
 
 
 $(document).ready(function(){
+
+    for(i=0;i<gridArray.length;i++){
+
+    }
+
     var visTile = $('.mg_tile-inside:visible')
 // for loop to shuffle the playing cards in the gridArray. 
-    for(i=1;i<100;i++){
-        var rand = Math.floor(Math.random()*16);
-        var rand2 = Math.floor(Math.random()*16);
+    for(i=1;i<gridSize*5;i++){
+        var rand = Math.floor(Math.random()*gridSize);
+        var rand2 = Math.floor(Math.random()*gridSize);
         var temp = gridArray[rand];
         gridArray[rand] = gridArray[rand2];
         gridArray[rand2] = temp;
