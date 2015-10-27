@@ -1,95 +1,87 @@
 var moves=0;
 var wins = 0;
 var cards = [
-    '<img src="img/default/monsters-01.png">', '<img src="img/default/monsters-02.png">', 
-    '<img src="img/default/monsters-03.png">', '<img src="img/default/monsters-04.png">', 
-    '<img src="img/default/monsters-05.png">', '<img src="img/default/monsters-06.png">', 
-    '<img src="img/default/monsters-07.png">', '<img src="img/default/monsters-08.png">', 
-    '<img src="img/default/monsters-09.png">', '<img src="img/default/monsters-11.png">',
-    '<img src="img/default/monsters-13.png">', '<img src="img/default/monsters-14.png">', 
-    '<img src="img/default/monsters-15.png">', '<img src="img/default/monsters-16.png">' 
+    "<img src='img/default/monsters-1.png'>",
+    "<img src='img/default/monsters-2.png'>", 
+    "<img src='img/default/monsters-3.png'>",
+    "<img src='img/default/monsters-4.png'>", 
+    "<img src='img/default/monsters-5.png'>",
+    "<img src='img/default/monsters-6.png'>", 
+    "<img src='img/default/monsters-7.png'>",
+    "<img src='img/default/monsters-8.png'>", 
+    "<img src='img/default/monsters-9.png'>",
+    "<img src='img/default/monsters-10.png'>",
+    "<img src='img/default/monsters-11.png'>",
+    "<img src='img/default/monsters-12.png'>", 
+    "<img src='img/default/monsters-13.png'>",
+    "<img src='img/default/monsters-14.png'>" 
 ];
 var gridSize;
 var gameTiles;
 var gridArray;
-
+var rowSize;
 
 $(document).ready(function(){
-// Use .append() to generate the required divs for the board... remember to addClass
-// when necessary so that the formatting stays consistent.
-// pseudo code outline
-// 
-// set up a for loop that will run through the length of the gridArray...
-// on each iteration must add a div, with two divs inside of it, each one of these
-// divs have specific classes that should be assigned to them that will format them.
-// 
-// populating the webpage with the required divs
+
     $('input').click(function(){
         $('#button-bucket').hide();
         $('.counter').show();
         var dif = $(this).attr('difficulty');
         if(dif === 'easy'){
-            gridSize = 8;
+            rowSize = 4;
+            gridSize = rowSize*2;
         }else if(dif === 'medium'){
-            gridSize = 16;
+            rowSize = 5;
+            gridSize = rowSize*4;
         }else if(dif === 'hard'){
-            gridSize = 28;
-        }
-    
-
-    gameTiles = cards.slice(0,(gridSize/2));
-    gridArray = $.merge(gameTiles,gameTiles);
-
-    for(i=0;i<gridArray.length;i++){
-        $("#mg_contents").append("<div class='mg_tile'><div class='mg_tile-inner'></div></div>");
-    }
-        $('.mg_tile-inner').append('<div class="mg_tile-outside"></div><div class="mg_tile-inside"></div');
-    // Need to figure out how to add one image to each of the inside divs
-    // that I have generated... but looking good so far.
-    // var cardArray = $('.mg_tile-inside');
-    // for(i=0;i<cardArray.length;i++){
-
-    // }
-
-    var visTile = $('.mg_tile-inside:visible')
-// for loop to shuffle the playing cards in the gridArray. 
-    for(i=1;i<gridSize*5;i++){
-        var rand = Math.floor(Math.random()*gridSize);
-        var rand2 = Math.floor(Math.random()*gridSize);
-        var temp = gridArray[rand];
-        gridArray[rand] = gridArray[rand2];
-        gridArray[rand2] = temp;
-    }
-
-});
-
-    $('.mg_tile').click(function(){
-        
-
-        if($('.mg_tile-inside:visible').length == 2){
-            $('.mg_tile-inside').hide();
-            moves++;
-
+            rowSize = 7;
+            gridSize = rowSize*4;
         }
 
-        $(this).find('.mg_tile-inside').show();
+        gameTiles = cards.slice(0,(gridSize/2));
+        gridArray = $.merge(gameTiles,gameTiles);
 
-        //Check again
-        if($('.mg_tile-inside:visible').length == 2){
-            var card = [];
-            var visibleCards = $('.mg_tile-inside:visible').each(function(i){
-                card.push($(this).attr('card'));
-            });
-            if(card[0] == card[1]){
-                alert('match!');
+        var visTile = $('.mg_tile-inside:visible')
+    // for loop to shuffle the playing cards in the gridArray. 
+        for(i=1;i<gridSize*5;i++){
+            var rand = Math.floor(Math.random()*gridSize);
+            var rand2 = Math.floor(Math.random()*gridSize);
+            var temp = gridArray[rand];
+            gridArray[rand] = gridArray[rand2];
+            gridArray[rand2] = temp;
+        }
+
+        for(i=0;i<gridArray.length;i++){
+            $("#mg_contents").append("<div class='mg_tile'><div class='mg_tile-inner unmatched'><div class='mg_tile-outside'></div><div class='mg_tile-inside'>"+gridArray[i]+"</div></div></div>");
+        }
+        $('.mg_tile').css('height',((1/rowSize)*100)+'%');
+        $('.mg_tile').css('width',((1/rowSize)*100)+'%');
+
+        $('.mg_tile').click(function(){
+            if($('.mg_tile-inner.flipped.unmatched').length == 2){
+                $('.mg_tile-inner.unmatched').removeClass('flipped');
                 moves++;
-                $('.mg_tile-inside:visible').removeClass('mg_tile-inside').addClass('mg_tile-match');
-                if($('.mg_tile-inside').length == 0){
-                    youWin();
-                }
-            }   
-        }
-    $('#move-counter').html(moves);
+            }
+
+            $(this).find('.mg_tile-inner').addClass('flipped');
+
+            //Check again
+            if($('.mg_tile-inner.flipped.unmatched').length == 2){
+                var card = [];
+                var visibleCards = $('.mg_tile-inner.flipped.unmatched .mg_tile-inside').each(function(i){
+                    card.push($(this).find('img').attr('src'));
+                });
+                if(card[0] == card[1]){
+                    // alert('match!');
+                    moves++;
+                    $('.mg_tile-inner.flipped.unmatched').removeClass('unmatched').addClass('matched');
+                    if($('.mg_tile-inner.matched').length == gridSize){
+                        youWin();
+                    }
+                }   
+            }
+        $('#move-counter').html(moves);
+        });
     });
 });
 function youWin(){
