@@ -99,6 +99,17 @@ opacity: 0;
 -ms-transition: all 0.3s ease-in;
 transition: all 0.3s ease-in;  
 }
+body #button-bucket, body h1{
+  font-family: Impact;
+  display:block;
+  text-align: center;
+  margin: auto;
+  padding:2%;
+}
+body .counter{
+  display: block;
+  text-align: center;
+}
 
 
 

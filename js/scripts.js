@@ -9,10 +9,9 @@ var cards = [
     '<img src="img/default/monsters-13.png">', '<img src="img/default/monsters-14.png">', 
     '<img src="img/default/monsters-15.png">', '<img src="img/default/monsters-16.png">' 
 ];
-var gridSize = 8;
-var gameTiles = cards.slice(0,(gridSize/2));
-var gridArray = $.merge(gameTiles,gameTiles);
-
+var gridSize;
+var gameTiles;
+var gridArray;
 
 
 $(document).ready(function(){
@@ -24,7 +23,23 @@ $(document).ready(function(){
 // on each iteration must add a div, with two divs inside of it, each one of these
 // divs have specific classes that should be assigned to them that will format them.
 // 
-// populating the webpage with the required divs 
+// populating the webpage with the required divs
+    $('input').click(function(){
+        $('#button-bucket').hide();
+        $('.counter').show();
+        var dif = $(this).attr('difficulty');
+        if(dif === 'easy'){
+            gridSize = 8;
+        }else if(dif === 'medium'){
+            gridSize = 16;
+        }else if(dif === 'hard'){
+            gridSize = 28;
+        }
+    
+
+    gameTiles = cards.slice(0,(gridSize/2));
+    gridArray = $.merge(gameTiles,gameTiles);
+
     for(i=0;i<gridArray.length;i++){
         $("#mg_contents").append("<div class='mg_tile'><div class='mg_tile-inner'></div></div>");
     }
@@ -74,16 +89,18 @@ $(document).ready(function(){
                 }
             }   
         }
-
+    $('#move-counter').html(moves);
     });
-
+});
 function youWin(){
     alert('You won in '+moves+' moves!');
     $('.mg_tile-match').addClass('mg_tile-inside');
     $('.mg_tile-inside').removeClass('mg_tile-match');
     $('.mg_tile-inside').hide();
     wins++;
+    $('.win-counter').html(wins);
     moves = 0;
+    $('#button-bucket').show()
 
 }
 

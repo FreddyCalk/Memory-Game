@@ -14,12 +14,21 @@ put in to help you get there.
         <!-- title -->
         <title>Memory Game!</title>
         <!-- css -->
-        <!-- <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto+Slab"> -->
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto+Slab">
+
         <link rel="stylesheet" href="css/memory.css">
         <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
         <script type="text/javascript" src="js/scripts.js"></script>
     </head>
     <body>
+    <h1>Memory Game</h1>
+        <div id='button-bucket'>
+            <input class="difficulty" type="button" value="Easy" difficulty='easy'>
+            <input class="difficulty" type="button" value="Medium" difficulty='medium'>
+            <input class="difficulty" type="button" value="Hard" difficulty='hard'>
+        </div>
+        <div class="counter" style="display:none">Moves: <span id="move-counter">0</span></div>
+        <div class="counter" style="display:none">Wins: <span id="win-counter">0</span></div>
         <div id="mg_wrapper" class="mg_wrapper">
             <div id="mg_contents" class="mg_contents">
                 <!-- Our tiles will go here! -->
