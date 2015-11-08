@@ -1,5 +1,15 @@
-var moves=0;
+var moves = 0;
 var wins = 0;
+var games = 0;
+var hardMovesAvg = 0;
+var medMovesAvg = 0;
+var easyMovesAvg = 0;
+var easyMoves = 0;
+var medMoves = 0;
+var hardMoves = 0;
+var easyGames = 0;
+var medGames = 0;
+var hardGames = 0;
 var cards = [
     "<img src='img/default/monsters-1.png'>",
     "<img src='img/default/monsters-2.png'>", 
@@ -30,12 +40,21 @@ $(document).ready(function(){
         if(dif === 'easy'){
             rowSize = 4;
             gridSize = rowSize*2;
+            $('#easy').show();
+            $('#medium').hide();
+            $('#hard').hide();
         }else if(dif === 'medium'){
             rowSize = 5;
             gridSize = rowSize*4;
+            $('#easy').hide();
+            $('#medium').show();
+            $('#hard').hide();
         }else if(dif === 'hard'){
             rowSize = 7;
             gridSize = rowSize*4;
+            $('#easy').hide();
+            $('#medium').hide();
+            $('#hard').show();
         }
 
         gameTiles = cards.slice(0,(gridSize/2));
@@ -75,7 +94,7 @@ $(document).ready(function(){
                     moves++;
                     $('.mg_tile-inner.flipped.unmatched').removeClass('unmatched').addClass('matched');
                     if($('.mg_tile-inner.matched').length == gridSize){
-                        youWin();
+                        youWin(dif);
                     }
                 }else{
                     setTimeout(function(){
@@ -88,12 +107,31 @@ $(document).ready(function(){
         });
     });
 });
-function youWin(){
+function youWin(diff){
     alert('You won in '+moves+' moves!');
     $('.mg_tile-match').addClass('mg_tile-inside');
     $('.mg_tile-inside').removeClass('mg_tile-match');
     $('.mg_tile-inside').hide();
     wins++;
+    games++;
+    if(diff = 'easy'){
+        easyGames++;
+        easyMoves += moves;
+        easyMovesAvg = Math.round((easyMoves/easyGames)*10)/10;
+        $('#easy-avg').text(easyMovesAvg);
+    }else if(diff = 'medium'){
+        medGames++;
+        medMoves += moves;
+        medMovesAvg = Math.round((medMoves/medGames)*10)/10;
+        $('med-avg').text(medMovesAvg);
+    }else if(diff = 'hard'){
+        hardGames++;
+        hardMoves += moves;
+        hardMovesAvg = Math.round((hardMoves/hardGames)*10)/10;
+        $('hard-avg').text(hardMovesAvg);
+    }
+
+
     $('#win-counter').html(wins);
     moves = 0;
     $('#button-bucket').show();

@@ -52,8 +52,7 @@ img {
   transform: translateX(-100%) rotateY(-180deg);
 }
 
-.mg_tile-outside,
-.mg_tile-inside,{
+.mg_tile-inner .mg_tile-outside, .mg_tile-inner .mg_tile-inside{
   /*position must be set*/
   /*top and left must be set*/
   /*height and width must be set*/
@@ -110,6 +109,10 @@ body #button-bucket .difficulty{
   font-size:60px;
 }
 body .counter{
+  display: block;
+  text-align: center;
+}
+body .diff-counter{
   display: block;
   text-align: center;
 }
