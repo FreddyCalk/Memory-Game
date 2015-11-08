@@ -42,7 +42,7 @@ img {
   height: 100%;
   cursor: pointer;
 
-  position: absolute;
+  position: relative;
   transform-style: preserve-3d;
   transition: transform 1s;
   transform-origin: right center;

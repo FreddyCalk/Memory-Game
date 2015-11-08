@@ -42,6 +42,7 @@ $(document).ready(function(){
         gridArray = $.merge(gameTiles,gameTiles);
 
         var visTile = $('.mg_tile-inside:visible')
+        $('#mg_contents').empty();
     // for loop to shuffle the playing cards in the gridArray. 
         for(i=1;i<gridSize*5;i++){
             var rand = Math.floor(Math.random()*gridSize);
@@ -52,16 +53,14 @@ $(document).ready(function(){
         }
 
         for(i=0;i<gridArray.length;i++){
-            $("#mg_contents").append("<div class='mg_tile'><div class='mg_tile-inner unmatched'><div class='mg_tile-outside'></div><div class='mg_tile-inside'>"+gridArray[i]+"</div></div></div>");
+            var html = "<div class='mg_tile'><div class='mg_tile-inner unmatched'>"
+                html += "<div class='mg_tile-outside'></div><div class='mg_tile-inside'>"+gridArray[i]+"</div></div></div>"
+            $("#mg_contents").append(html);
         }
         $('.mg_tile').css('height',((1/rowSize)*100)+'%');
         $('.mg_tile').css('width',((1/rowSize)*100)+'%');
 
         $('.mg_tile').click(function(){
-            if($('.mg_tile-inner.flipped.unmatched').length == 2){
-                $('.mg_tile-inner.unmatched').removeClass('flipped');
-                moves++;
-            }
 
             $(this).find('.mg_tile-inner').addClass('flipped');
 
@@ -78,6 +77,11 @@ $(document).ready(function(){
                     if($('.mg_tile-inner.matched').length == gridSize){
                         youWin();
                     }
+                }else{
+                    setTimeout(function(){
+                        $('.mg_tile-inner.unmatched').removeClass('flipped');
+                        moves++;
+                    },1000);
                 }   
             }
         $('#move-counter').html(moves);
@@ -90,9 +94,10 @@ function youWin(){
     $('.mg_tile-inside').removeClass('mg_tile-match');
     $('.mg_tile-inside').hide();
     wins++;
-    $('.win-counter').html(wins);
+    $('#win-counter').html(wins);
     moves = 0;
-    $('#button-bucket').show()
+    $('#button-bucket').show();
+    // $('#mg_contents').;
 
 }
 
