@@ -114,21 +114,21 @@ function youWin(diff){
     $('.mg_tile-inside').hide();
     wins++;
     games++;
-    if(diff = 'easy'){
+    if(diff === 'easy'){
         easyGames++;
         easyMoves += moves;
         easyMovesAvg = Math.round((easyMoves/easyGames)*10)/10;
         $('#easy-avg').text(easyMovesAvg);
-    }else if(diff = 'medium'){
+    }else if(diff === 'medium'){
         medGames++;
         medMoves += moves;
         medMovesAvg = Math.round((medMoves/medGames)*10)/10;
-        $('med-avg').text(medMovesAvg);
-    }else if(diff = 'hard'){
+        $('#med-avg').text(medMovesAvg);
+    }else if(diff === 'hard'){
         hardGames++;
         hardMoves += moves;
         hardMovesAvg = Math.round((hardMoves/hardGames)*10)/10;
-        $('hard-avg').text(hardMovesAvg);
+        $('#hard-avg').text(hardMovesAvg);
     }
 
 
