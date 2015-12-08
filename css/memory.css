@@ -44,7 +44,7 @@ img {
 
   position: relative;
   transform-style: preserve-3d;
-  transition: transform 1s;
+  transition: transform 0.3s;
   transform-origin: right center;
 
 }
@@ -56,7 +56,7 @@ img {
   /*position must be set*/
   /*top and left must be set*/
   /*height and width must be set*/
-  position: absolute;
+  position: relative;
   top: 0;
   left: 0;
   width: 100%;

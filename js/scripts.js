@@ -100,7 +100,7 @@ $(document).ready(function(){
                     setTimeout(function(){
                         $('.mg_tile-inner.unmatched').removeClass('flipped');
                         moves++;
-                    },1000);
+                    },700);
                 }   
             }
         $('#move-counter').html(moves);
