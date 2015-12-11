@@ -135,7 +135,6 @@ function youWin(diff){
     $('#win-counter').html(wins);
     moves = 0;
     $('#button-bucket').show();
-    // $('#mg_contents').;
 
 }
 

@@ -56,7 +56,7 @@ img {
   /*position must be set*/
   /*top and left must be set*/
   /*height and width must be set*/
-  position: relative;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
