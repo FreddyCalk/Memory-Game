@@ -72,12 +72,16 @@ $(document).ready(function(){
         }
 
         for(i=0;i<gridArray.length;i++){
-            var html = "<div class='mg_tile'><div class='mg_tile-inner unmatched'>"
+            var html = "<div class='mg_tile'><div class='mg_tile-inner unmatched flipped'>"
                 html += "<div class='mg_tile-outside'></div><div class='mg_tile-inside'>"+gridArray[i]+"</div></div></div>"
             $("#mg_contents").append(html);
         }
         $('.mg_tile').css('height',((1/rowSize)*100)+'%');
         $('.mg_tile').css('width',((1/rowSize)*100)+'%');
+
+        setTimeout(function(){
+            $('.mg_tile-inner').removeClass('flipped');
+        },2000)
 
         $('.mg_tile').click(function(){
 
