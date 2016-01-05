@@ -38,7 +38,7 @@ $(document).ready(function(){
         $('.counter').show();
         var dif = $(this).attr('difficulty');
         if(dif === 'easy'){
-            rowSize = 4;
+            rowSize = 5;
             gridSize = rowSize*2;
             $('#easy').show();
             $('#medium').hide();
