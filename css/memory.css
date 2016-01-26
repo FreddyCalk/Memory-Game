@@ -112,6 +112,7 @@ body #button-bucket, body h1{
 }
 body #button-bucket .difficulty{
   font-size:60px;
+  border-radius: 20px;
 }
 body .counter{
   display: block;
