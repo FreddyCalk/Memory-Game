@@ -33,6 +33,8 @@ var rowSize;
 
 $(document).ready(function(){
 
+    $.backstretch('http://firemansamgames.net/templates/monster/images/background.jpg');
+
     $('input').click(function(){
         $('#button-bucket').hide();
         $('.counter').show();
